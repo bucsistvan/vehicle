@@ -45,7 +45,7 @@ public class OwnerRestService {
     public Response findVehiclesByOwnerId(@PathParam("id") Long id) {
         Owner owner = ownerService.findById(id);
         if(owner==null){
-            Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
         List<Car> listOfCars = carService.getAll();
         List<CarModel> cars = listOfCars.stream().filter(c -> c.getOwner().getId().equals(id)).map(this::createModelByEntityCar).collect(Collectors.toList());
@@ -80,7 +80,7 @@ public class OwnerRestService {
     public Response update(OwnerModel model) {
         Owner owner = ownerService.findById(model.getId());
         if(owner==null){
-            Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
         owner.setFullName(model.getFullName());
         ownerService.update(owner);

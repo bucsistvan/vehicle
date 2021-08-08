@@ -2,6 +2,7 @@ package hu.ulyssys.java.course.javaee.demo.rest;
 
 import hu.ulyssys.java.course.javaee.demo.rest.model.CoreRestModel;
 import hu.ulyssys.java.course.javaee.demo.vehicle.entity.AbstractVehicle;
+import hu.ulyssys.java.course.javaee.demo.vehicle.entity.Owner;
 import hu.ulyssys.java.course.javaee.demo.vehicle.service.CoreService;
 import hu.ulyssys.java.course.javaee.demo.vehicle.service.OwnerService;
 
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class CoreRestService<T extends AbstractVehicle, M extends CoreRestModel> {
@@ -30,13 +32,21 @@ public abstract class CoreRestService<T extends AbstractVehicle, M extends CoreR
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id) {
-        return Response.ok(createModelFromEntity(service.findById(id))).build();
+        T vehicle = service.findById(id);
+        if(vehicle == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(createModelFromEntity(vehicle)).build();
     }
 
     @GET
     @Path("owner/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findByOwnerId(@PathParam("id") Long id) {
+        Owner owner = ownerService.findById(id);
+        if(owner == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         return Response.ok(service.getAll().stream()
                 .filter(o -> o.getOwner().getId().equals(id))
                 .map(this::createModelFromEntity)

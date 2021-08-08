@@ -5,14 +5,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en"
-      xmlns:tp="http://java.sun.com/jsf/composite/tutorialspoint">
+      xmlns:tp="http://java.sun.com/jsf/composite/">
 <h:head>
     <title>CAR demo</title>
 </h:head>
 <body>
 <h:form id="form">
     <ui:include src="appMenu.xhtml"/>
+    <!--<ui:composition template="../templates/template.xhtml"/>-->
+    <!--<ui:insert name="menu">
+        <ui:include src="../templates/template.xhtml"></ui:include>
+    </ui:insert>-->
     <p:growl id="growl" showDetail="false"/>
+
+
 
     <p:toolbar>
         <p:toolbarGroup id="functionGroup">
