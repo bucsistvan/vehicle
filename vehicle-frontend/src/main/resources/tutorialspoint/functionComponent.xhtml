@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      >
+<composite:interface>
+    <composite:attribute name = "form" />
+</composite:interface>
+<composite:implementation>
+    <p:toolbarGroup id="functionGroup">
+        <p:commandButton id="add" icon="pi pi-plus" process="@this" value="Új hozzáadása"
+                         actionListener="#{carCRUDMBean.initSave}" update="#{cc.attrs.form}" oncomplete="PF('carDialog').show()"/>
+
+        <p:commandButton disabled="#{carCRUDMBean.selectedEntity.id==null}" id="delete" icon="pi pi-times"
+                         process="@this" value="Törlés"
+                         actionListener="#{carCRUDMBean.remove}"
+                         update="@form">
+            <p:confirm header="Törlés" message="Biztos vagy benne?" icon="pi pi-times"/>
+        </p:commandButton>
+        <p:commandButton id="update" disabled="#{carCRUDMBean.selectedEntity.id==null}" process="@this" value="Módosítás" icon="pi pi-pencil" oncomplete="PF('carDialog').show()"
+                         update="@([id$=carForm])"/>
+    </p:toolbarGroup>
+</composite:implementation>
+
+
+</html>

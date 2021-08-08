@@ -1,0 +1,42 @@
+POST http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "manufacturer": "kiárly cég asd",
+  "type": "honda",
+  "ownerID": 3
+}
+
+###
+
+PUT http://localhost:8080/api/car
+Content-Type: application/json
+
+{
+  "id": 5,
+  "manufacturer": "gfgfccg",
+  "type": "honda",
+  "alma": "körte",
+  "ownerID": 2
+}
+###
+
+GET http://localhost:8080/api/car
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/car/13
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/car/owner/4
+Accept: application/json
+
+###
+
+DELETE http://localhost:8080/api/car/6
+Accept: application/json
+
+###
